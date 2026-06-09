@@ -1,0 +1,62 @@
+# Default configuration for the Motor Imagery EEG classification benchmark.
+# Every key mirrors a field in src/config.py. Sequence fields (bands, etc.)
+# are written as YAML lists and coerced back to tuples on load.
+
+seed: 42
+output_dir: outputs
+run_deep_models: true
+
+dataset:
+  n_subjects: 9
+  trials_per_subject: 88        # 9 * 88 = 792 total trials (matches the report)
+  n_channels: 22
+  n_eog_channels: 3
+  sfreq: 250.0
+  trial_seconds: 4.0
+  n_classes: 4
+  noise_std: 1.0
+  class_separability: 1.0       # tuned so per-subject CV shows graded variability
+  # subject_strength: left null so a deterministic 0.5..1.0 spread is generated,
+  # producing the "BCI illiteracy" weak-subject effect.
+
+preprocessing:
+  l_freq: 7.0
+  h_freq: 30.0
+  filter_order: 5
+
+fbcsp:
+  bands:
+    - [8.0, 12.0]
+    - [12.0, 16.0]
+    - [16.0, 22.0]
+    - [22.0, 30.0]
+  n_csp_components: 4
+  filter_order: 4
+
+svm:
+  C: 1.0
+  gamma: scale
+  kernel: rbf
+
+eegnet:
+  F1: 8
+  D: 2
+  F2: 16
+  kern_length: 64
+  dropout: 0.5
+  epochs: 75
+  batch_size: 32
+  learning_rate: 0.003
+
+fusion:
+  branch_filters: [32, 32, 32]
+  branch_kernels: [32, 64, 128]
+  dense_units: 128
+  dropout: 0.5
+  epochs: 75
+  batch_size: 32
+  learning_rate: 0.003
+
+cv:
+  intra_session_folds: 5
+  subject_specific_folds: 3

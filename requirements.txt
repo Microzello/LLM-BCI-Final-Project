@@ -1,0 +1,14 @@
+# Core scientific stack
+numpy>=1.24
+scipy>=1.10
+scikit-learn>=1.3
+pandas>=2.0
+
+# Deep learning (CPU build is fine; swap for tensorflow if you have CUDA)
+tensorflow>=2.12
+
+# Plotting
+matplotlib>=3.7
+
+# Config
+PyYAML>=6.0

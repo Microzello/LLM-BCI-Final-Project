@@ -1,0 +1,60 @@
+# Fast smoke-test configuration. Smaller dataset, fewer epochs and folds so the
+# entire pipeline (classical + deep + per-subject + figures) runs in a couple of
+# minutes. Use this to verify the code end-to-end, not for reportable numbers.
+#
+#   python train.py --config configs/smoke.yaml
+
+seed: 42
+output_dir: outputs_smoke
+run_deep_models: true
+
+dataset:
+  n_subjects: 9
+  trials_per_subject: 40        # 360 trials total
+  n_channels: 22
+  sfreq: 250.0
+  trial_seconds: 4.0
+  n_classes: 4
+  class_separability: 2.2       # easier so deep nets converge in few epochs
+
+preprocessing:
+  l_freq: 7.0
+  h_freq: 30.0
+  filter_order: 5
+
+fbcsp:
+  bands:
+    - [8.0, 12.0]
+    - [12.0, 16.0]
+    - [16.0, 22.0]
+    - [22.0, 30.0]
+  n_csp_components: 4
+  filter_order: 4
+
+svm:
+  C: 1.0
+  gamma: scale
+  kernel: rbf
+
+eegnet:
+  F1: 8
+  D: 2
+  F2: 16
+  kern_length: 64
+  dropout: 0.5
+  epochs: 30
+  batch_size: 32
+  learning_rate: 0.003
+
+fusion:
+  branch_filters: [32, 32, 32]
+  branch_kernels: [32, 64, 128]
+  dense_units: 128
+  dropout: 0.5
+  epochs: 30
+  batch_size: 32
+  learning_rate: 0.003
+
+cv:
+  intra_session_folds: 2
+  subject_specific_folds: 2
