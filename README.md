@@ -1,4 +1,4 @@
-# Motor Imagery EEG Classification — Group OLAF.
+# Motor Imagery EEG Classification — Group OLAF
 
 Training pipeline for 4-class Motor Imagery (MI) EEG classification on the
 BCI Competition IV Dataset 2a, using a **synthetic / simulated** generator that
