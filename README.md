@@ -1,4 +1,4 @@
-# Motor Imagery EEG Classification — Group OLAF
+# Motor Imagery EEG Classification - Group OLAF
 
 Training pipeline for 4-class Motor Imagery (MI) EEG classification on the
 BCI Competition IV Dataset 2a, using a **synthetic / simulated** generator that
@@ -7,9 +7,9 @@ structure described in the project report.
 
 Three classifier families are implemented and benchmarked:
 
-1. **FBCSP + SVM** — Filter Bank Common Spatial Patterns with an RBF-kernel SVM.
-2. **varEEGNet** — EEGNet variant with a log-variance compression layer (~1,636 params).
-3. **Fusion 3CNNs** — three parallel convolutional branches fused before a dense head (~23k params).
+1. **FBCSP + SVM** - Filter Bank Common Spatial Patterns with an RBF-kernel SVM.
+2. **varEEGNet** - EEGNet variant with a log-variance compression layer (~1,636 params).
+3. **Fusion 3CNNs** - three parallel convolutional branches fused before a dense head (~23k params).
 
 Baselines for completeness: standard **EEGNet** (~3,524 params), **KNN**, **AdaBoost**.
 
@@ -20,6 +20,20 @@ Baselines for completeness: standard **EEGNet** (~3,524 params), **KNN**, **AdaB
 > The architectural *mechanism* matches the report: varEEGNet replaces EEGNet's
 > average-pool + flatten with a single log-variance layer, and the resulting
 > ~53% parameter reduction (3,524 -> 1,636) reproduces the report's claim.
+
+<img width="1040" height="520" alt="vareegnet_loss" src="https://github.com/user-attachments/assets/bfa4dcc7-8804-4809-be26-e60931206c2e" />
+<img width="1040" height="520" alt="vareegnet_accuracy" src="https://github.com/user-attachments/assets/ec81c52a-15d0-4cda-87ea-3c3e201debea" />
+<img width="1170" height="650" alt="per_subject_accuracy" src="https://github.com/user-attachments/assets/aa4d17ee-253b-4da3-839b-812b3799a57b" />
+<img width="1300" height="650" alt="per_fold_accuracy" src="https://github.com/user-attachments/assets/81c0595a-1cde-4d24-b3ac-06f76c4e2a2e" />
+<img width="1040" height="650" alt="parameter_efficiency" src="https://github.com/user-attachments/assets/9d60ea64-d47e-4c4e-bfeb-390adf2a3bd1" />
+<img width="1170" height="650" alt="model_accuracy_comparison" src="https://github.com/user-attachments/assets/01043f21-677b-4600-86dd-c44d31ece6fb" />
+<img width="1170" height="650" alt="kappa_by_model" src="https://github.com/user-attachments/assets/6b42919a-8aaa-42dc-9c0d-77bb3ec1afeb" />
+<img width="1040" height="520" alt="fusion3cnns_loss" src="https://github.com/user-attachments/assets/87e7c1a7-fb3a-4970-be01-49214328b066" />
+<img width="1040" height="520" alt="fusion3cnns_accuracy" src="https://github.com/user-attachments/assets/aba5a9e7-be2e-405a-8745-075229f19381" />
+<img width="1040" height="520" alt="eegnet_loss" src="https://github.com/user-attachments/assets/98e2de45-7a00-4c24-aa60-727e0700d231" />
+<img width="1040" height="520" alt="eegnet_accuracy" src="https://github.com/user-attachments/assets/0d0cc29b-de5c-4054-aced-69ef4ef304c1" />
+
+
 
 ## Dataset
 
